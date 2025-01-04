@@ -1,24 +1,19 @@
 "use client";
 
-import { useSession, signIn, signOut } from "next-auth/react";
-import Image from "next/image";
+import { useSession, signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function TestAuth() {
   const { data: session, status } = useSession();
+  const router = useRouter();
 
   if (status === "loading") {
     return <div>Loading...</div>;
   }
 
   if (status === "authenticated") {
-    return (
-      <div>
-        <p>Signed in as {session.user!.email}</p>
-        <p>{session.user?.image!}</p>
-        <Image src={session.user?.image!} alt={""} width={100} height={100}/>
-        <button onClick={() => signOut()}>Sign out</button>
-      </div>
-    );
+    router.push("/home");
+    return null;
   }
 
   return (
