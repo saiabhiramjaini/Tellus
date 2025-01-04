@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { SessionWrapper } from "./component/SessionWrapper";
+import { SessionWrapper } from "./components/SessionWrapper";
 
 export const metadata: Metadata = {
   title: "OpiniX",
