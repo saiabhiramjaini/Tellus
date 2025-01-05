@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { SessionWrapper } from "../components/SessionWrapper";
+import { Providers } from "./providers";
+import { Navbar } from "@/components/Navbar";
 
 export const metadata: Metadata = {
-  title: "OpiniX",
-  description: "Your Customer Story, Quantified",
+  title: "Tellus",
+  description: "The Pulse of Customer Experience",
 };
 
 export default function RootLayout({
@@ -15,7 +16,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <SessionWrapper>{children}</SessionWrapper>
+      <Providers>
+          <Navbar />
+          <main className="container mx-auto p-4">
+            {children}
+          </main>
+        </Providers>
       </body>
     </html>
   );

@@ -1,27 +1,29 @@
-"use client";
+"use client"
 
-import { useState } from 'react';
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { useParams } from 'next/navigation';
-import { StarIcon } from "lucide-react";
+import { useState } from 'react'
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+import { Textarea } from "@/components/ui/textarea"
+import { useParams } from 'next/navigation'
+import { StarIcon } from 'lucide-react'
+import { useSession } from "next-auth/react"
 
 export default function FeedbackPage() {
-    const params = useParams();
+    const { data: session } = useSession()
+    const params = useParams()
     const [formData, setFormData] = useState({
         name: '',
         feedback: '',
         rating: 0
-    });
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [message, setMessage] = useState('');
+    })
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [message, setMessage] = useState('')
 
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        setMessage('');
+        e.preventDefault()
+        setIsSubmitting(true)
+        setMessage('')
 
         try {
             const response = await fetch('/api/feedback', {
@@ -31,25 +33,31 @@ export default function FeedbackPage() {
                 },
                 body: JSON.stringify({
                     ...formData,
-                    code: params.code
+                    code: params.code,
+                    email: session?.user?.email
                 }),
-            });
+            })
 
             if (response.ok) {
-                setMessage('Thank you for your feedback!');
-                setFormData({ name: '', feedback: '', rating: 0 });
+                setMessage('Thank you for your feedback!')
+                setFormData({ name: '', feedback: '', rating: 0 })
             } else {
-                setMessage('Failed to submit feedback. Please try again.');
+                setMessage('Failed to submit feedback. Please try again.')
             }
         } catch (error) {
-            setMessage('An error occurred. Please try again later.');
+            setMessage('An error occurred. Please try again later.')
         } finally {
-            setIsSubmitting(false);
+            setIsSubmitting(false)
         }
-    };
+    }
+
+    if (!session) {
+        return <div>Please log in to submit feedback.</div>
+    }
 
     return (
-        <div className="max-w-2xl mx-auto p-4">
+        <div className="max-w-2xl mx-auto">
+            <h1 className="text-2xl font-bold mb-4">Submit Feedback</h1>
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
                     <Label htmlFor="name">Name</Label>
@@ -113,5 +121,6 @@ export default function FeedbackPage() {
                 </Button>
             </form>
         </div>
-    );
+    )
 }
+
