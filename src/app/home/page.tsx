@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth/next"
 import { PrismaClient } from "@prisma/client"
 import { redirect } from 'next/navigation'
-import { DashboardClient } from "./dashboard-client"
+import { DashboardClient } from './dashboard-client'
 
 const prisma = new PrismaClient()
 
@@ -16,12 +16,16 @@ export default async function HomePage() {
     where: { email: session.user?.email! }
   })
 
+  if (!user) {
+    throw new Error("User not found")
+  }
+
   const feedback = await prisma.feedback.findMany({
-    where: { user: { id: user?.id } }
+    where: { user: { id: user.id } }
   })
 
-  const feedbackUrl = `${process.env.NEXTAUTH_URL}/${user?.code}`
+  const feedbackUrl = `${process.env.NEXTAUTH_URL}/${user.code}`
 
-  return <DashboardClient feedbackUrl={feedbackUrl} feedback={feedback} />
+  return <DashboardClient feedbackUrl={feedbackUrl} feedback={feedback} userCode={user.code} />
 }
 
