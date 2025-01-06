@@ -1,32 +1,27 @@
+import { getServerSession } from "next-auth/next"
+import { PrismaClient } from "@prisma/client"
+import { redirect } from 'next/navigation'
+import { DashboardClient } from "./dashboard-client"
 
-
-import { useSession } from "next-auth/react";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
 export default async function HomePage() {
-//   const { data: session } = useSession();
+  const session = await getServerSession()
   
-  const feedback = await prisma.feedback.findMany({
-    where: {
-      user: {
-        email: "abhiram"
-      }
-    }
-  });
+  if (!session) {
+    redirect('/api/auth/signin')
+  }
 
-  return (
-    <>
-      <div>home page</div>
-      <div>
-        {feedback.map((item) => (
-          // Add key prop for list items
-          <div key={item.id}>
-            {item.name}
-          </div>
-        ))}
-      </div>
-    </>
-  );
+  const user = await prisma.user.findUnique({
+    where: { email: session.user?.email! }
+  })
+
+  const feedback = await prisma.feedback.findMany({
+    where: { user: { id: user?.id } }
+  })
+
+  const feedbackUrl = `${process.env.NEXTAUTH_URL}/${user?.code}`
+
+  return <DashboardClient feedbackUrl={feedbackUrl} feedback={feedback} />
 }
+

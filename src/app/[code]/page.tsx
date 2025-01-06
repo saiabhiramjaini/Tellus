@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { useParams } from 'next/navigation'
 import { StarIcon } from 'lucide-react'
 import { useSession } from "next-auth/react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function FeedbackPage() {
     const { data: session } = useSession()
@@ -52,74 +53,90 @@ export default function FeedbackPage() {
     }
 
     if (!session) {
-        return <div>Please log in to submit feedback.</div>
+        return (
+            <div className="flex items-center justify-center h-screen bg-lightBlue">
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Access Denied</CardTitle>
+                        <CardDescription>Please log in to submit feedback.</CardDescription>
+                    </CardHeader>
+                </Card>
+            </div>
+        )
     }
 
     return (
-        <div className="max-w-2xl mx-auto">
-            <h1 className="text-2xl font-bold mb-4">Submit Feedback</h1>
-            <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
-                    <Label htmlFor="name">Name</Label>
-                    <Input
-                        id="name"
-                        value={formData.name}
-                        onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        placeholder="John Doe"
-                        required
-                    />
-                </div>
+        <div className="max-w-2xl mx-auto p-4">
+            <Card>
+                <CardHeader>
+                    <CardTitle>Submit Feedback</CardTitle>
+                    <CardDescription>We value your opinion</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        <div className="space-y-2">
+                            <Label htmlFor="name">Name</Label>
+                            <Input
+                                id="name"
+                                value={formData.name}
+                                onChange={(e) => setFormData({...formData, name: e.target.value})}
+                                placeholder="John Doe"
+                                required
+                            />
+                        </div>
 
-                <div className="space-y-2">
-                    <Label htmlFor="feedback">Your Feedback</Label>
-                    <Textarea
-                        id="feedback"
-                        value={formData.feedback}
-                        onChange={(e) => setFormData({...formData, feedback: e.target.value})}
-                        placeholder="Tell us what you think..."
-                        required
-                        className="min-h-32"
-                    />
-                </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="feedback">Your Feedback</Label>
+                            <Textarea
+                                id="feedback"
+                                value={formData.feedback}
+                                onChange={(e) => setFormData({...formData, feedback: e.target.value})}
+                                placeholder="Tell us what you think..."
+                                required
+                                className="min-h-32"
+                            />
+                        </div>
 
-                <div className="space-y-2">
-                    <Label>Rating</Label>
-                    <div className="flex gap-2">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                            <button
-                                key={star}
-                                type="button"
-                                onClick={() => setFormData({...formData, rating: star})}
-                                className="focus:outline-none"
-                            >
-                                <StarIcon
-                                    className={`w-6 h-6 ${
-                                        formData.rating >= star
-                                            ? 'text-yellow-400 fill-yellow-400'
-                                            : 'text-gray-300'
-                                    }`}
-                                />
-                            </button>
-                        ))}
-                    </div>
-                </div>
+                        <div className="space-y-2">
+                            <Label>Rating</Label>
+                            <div className="flex gap-2">
+                                {[1, 2, 3, 4, 5].map((star) => (
+                                    <button
+                                        key={star}
+                                        type="button"
+                                        onClick={() => setFormData({...formData, rating: star})}
+                                        className="focus:outline-none"
+                                    >
+                                        <StarIcon
+                                            className={`w-6 h-6 ${
+                                                formData.rating >= star
+                                                    ? 'text-yellow-400 fill-yellow-400'
+                                                    : 'text-gray-300'
+                                            }`}
+                                        />
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
 
-                {message && (
-                    <div className={`p-4 rounded ${
-                        message.includes('Thank you') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-                    }`}>
-                        {message}
-                    </div>
-                )}
+                        {message && (
+                            <div className={`p-4 rounded ${
+                                message.includes('Thank you') ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                            }`}>
+                                {message}
+                            </div>
+                        )}
 
-                <Button 
-                    type="submit" 
-                    disabled={isSubmitting}
-                    className="w-full"
-                >
-                    {isSubmitting ? 'Submitting...' : 'Submit Feedback'}
-                </Button>
-            </form>
+                        <Button 
+                            type="submit" 
+                            disabled={isSubmitting}
+                            className="w-full"
+                        >
+                            {isSubmitting ? 'Submitting...' : 'Submit Feedback'}
+                        </Button>
+                    </form>
+                </CardContent>
+            </Card>
         </div>
     )
 }
