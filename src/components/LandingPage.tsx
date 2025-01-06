@@ -5,12 +5,14 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Star, MessageCircle, BarChart3 } from 'lucide-react'
 import logo from "@/assets/logo.png"
 import { useRouter } from 'next/navigation'
+import { Navbar } from './Navbar'
 
 export function LandingPage() {
   const router = useRouter()
 
   return (
     <div className=" bg-gradient-to-b from-lightBlue to-white">
+      <Navbar />
       <div className="absolute inset-0 bg-grid-white/[0.2] bg-[size:20px_20px]" />
       <div className="relative pt-20 pb-16 sm:pt-24 sm:pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
