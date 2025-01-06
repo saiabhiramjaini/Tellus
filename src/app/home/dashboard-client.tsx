@@ -181,13 +181,13 @@ export function DashboardClient({ feedbackUrl, feedback, userCode }: DashboardCl
           </DialogHeader>
           <div className="bg-muted/50 p-4 rounded-md">
             <code className="text-sm break-all font-mono">
-              {`<div id="tellus-testimonials"></div>\n<script src="${process.env.NEXT_PUBLIC_BASE_URL || window.location.origin}/embed.js" data-code="${userCode}"></script>`}
+              {`<div id="tellus-testimonials"></div>\n<script src="${process.env.NEXT_AUTH_URL}/embed.js" data-code="${userCode}"></script>`}
             </code>
           </div>
           <Button 
             onClick={() => {
               navigator.clipboard.writeText(
-                `<div id="tellus-testimonials"></div>\n<script src="${process.env.NEXT_PUBLIC_BASE_URL || window.location.origin}/embed.js" data-code="${userCode}"></script>`
+                `<div id="tellus-testimonials"></div>\n<script src="${process.env.NEXT_AUTH_URL}/embed.js" data-code="${userCode}"></script>`
               );
               setCopyConfirmation('embed');
               setTimeout(() => setCopyConfirmation(null), 2000);
