@@ -55,7 +55,7 @@ export default function FeedbackPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-lightBlue to-white py-12 px-4">
+        <div className="min-h-screen bg-gradient-to-b from-lightBlue to-white py-12 px-4 flex items-center justify-center">
             <div className="max-w-2xl mx-auto">
                 <Card className="bg-white/50 backdrop-blur-sm">
                     <CardHeader className="text-center">
