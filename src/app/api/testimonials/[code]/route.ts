@@ -1,22 +1,24 @@
-// app/api/testimonials/[code]/route.ts
-import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient();
-import { z } from 'zod';
-
-const QuerySchema = z.object({
-  limit: z.string().optional().transform(val => parseInt(val || '5')),
-  offset: z.string().optional().transform(val => parseInt(val || '0')),
-});
+// src/app/api/testimonials/[code]/route.ts
+import { prisma } from '@/lib/prisma';
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
-  request: Request,
+  request: NextRequest,
   { params }: { params: { code: string } }
 ) {
   try {
-    const { searchParams } = new URL(request.url);
-    const query = QuerySchema.parse(Object.fromEntries(searchParams));
-    
+    const searchParams = request.nextUrl.searchParams;
+    const limit = parseInt(searchParams.get('limit') || '5');
+    const offset = parseInt(searchParams.get('offset') || '0');
+
+    // Input validation
+    if (isNaN(limit) || isNaN(offset) || limit < 0 || offset < 0) {
+      return NextResponse.json(
+        { error: 'Invalid limit or offset parameters' },
+        { status: 400 }
+      );
+    }
+
     const testimonials = await prisma.feedback.findMany({
       where: {
         code: params.code,
@@ -31,15 +33,35 @@ export async function GET(
       orderBy: {
         createdAt: 'desc',
       },
-      take: query.limit,
-      skip: query.offset,
+      take: limit,
+      skip: offset,
     });
 
-    return NextResponse.json(testimonials);
+    return NextResponse.json({
+      testimonials,
+      count: testimonials.length,
+      nextOffset: offset + limit,
+    });
+
   } catch (error) {
+    console.error('Testimonials fetch error:', error);
     return NextResponse.json(
       { error: 'Failed to fetch testimonials' },
       { status: 500 }
     );
   }
+}
+
+// Add CORS headers
+export async function OPTIONS() {
+  return NextResponse.json(
+    {},
+    {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+      },
+    }
+  );
 }
