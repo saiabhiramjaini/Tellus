@@ -10,12 +10,12 @@ export function LandingPage() {
   const router = useRouter()
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-lightBlue to-white">
+    <div className=" bg-gradient-to-b from-lightBlue to-white">
       <div className="absolute inset-0 bg-grid-white/[0.2] bg-[size:20px_20px]" />
       <div className="relative pt-20 pb-16 sm:pt-24 sm:pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center text-center">
-            <div className="relative h-32 w-32 overflow-hidden rounded-full bg-gradient-to-tr from-darkGray to-mediumGray p-[2px] mb-8 animate-pulse">
+            <div className="relative h-32 w-32 overflow-hidden rounded-full bg-gradient-to-tr from-darkGray to-mediumGray p-[2px] ">
               <Image 
                 src={logo} 
                 alt="Tellus Logo" 

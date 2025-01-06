@@ -1,10 +1,18 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useSession, signIn, signOut } from "next-auth/react"
-import { Button } from "@/components/ui/button"
-import { Menu, X, LayoutDashboard, Settings, LogOut, ChevronDown } from 'lucide-react'
-import { useState } from "react"
+import Link from "next/link";
+import Image from "next/image";
+import { useSession, signIn, signOut } from "next-auth/react";
+import { Button } from "@/components/ui/button";
+import {
+  Menu,
+  X,
+  LayoutDashboard,
+  Settings,
+  LogOut,
+  ChevronDown,
+} from "lucide-react";
+import { useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,51 +20,73 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import logo from "@/assets/logo.png";
+import google from "@/assets/google.png";
 
 export function Navbar() {
-  const { data: session } = useSession()
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { data: session } = useSession();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-gradient-to-r from-darkGray to-mediumGray border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
             >
-              Tellus
+              <div className="flex items-center justify-center gap-3">
+                <Image
+                  src={logo}
+                  alt="Logo"
+                  width={50}
+                  height={50}
+                  className="rounded-full"
+                />
+                <div>Tellus</div>
+              </div>
             </Link>
           </div>
           <div className="hidden md:flex items-center space-x-8">
-            <Link 
-              href="/home" 
+            <Link
+              href="/home"
               className="text-gray-300 hover:text-white transition-colors flex items-center gap-2"
             >
               <LayoutDashboard className="w-4 h-4" />
               Dashboard
             </Link>
-            
           </div>
           <div className="hidden md:block">
             {session ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+                  <Button
+                    variant="ghost"
+                    className="relative h-10 w-10 rounded-full"
+                  >
                     <Avatar className="h-10 w-10">
-                      <AvatarImage src={session.user?.image || ''} alt={session.user?.name || ''} />
-                      <AvatarFallback>{session.user?.name?.charAt(0) || 'U'}</AvatarFallback>
+                      <AvatarImage
+                        src={session.user?.image || ""}
+                        alt={session.user?.name || ""}
+                      />
+                      <AvatarFallback>
+                        {session.user?.name?.charAt(0) || "U"}
+                      </AvatarFallback>
                     </Avatar>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56" align="end">
                   <DropdownMenuLabel>
                     <div className="flex flex-col space-y-1">
-                      <p className="text-sm font-medium leading-none">{session.user?.name}</p>
-                      <p className="text-xs leading-none text-muted-foreground">{session.user?.email}</p>
+                      <p className="text-sm font-medium leading-none">
+                        {session.user?.name}
+                      </p>
+                      <p className="text-xs leading-none text-muted-foreground">
+                        {session.user?.email}
+                      </p>
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
@@ -67,11 +97,20 @@ export function Navbar() {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Button 
-                onClick={() => signIn("google")} 
+              <Button
+                onClick={() => signIn("google")}
                 className="bg-white text-darkGray hover:bg-gray-100 transition-colors"
               >
-                Sign in with Google
+                <div className="flex items-center justify-center gap-3">
+                  <Image
+                    src={google}
+                    alt="Google"
+                    width={20}
+                    height={20}
+                    className="rounded-full"
+                  />
+                  <div>Sign in with Google</div>
+                </div>
               </Button>
             )}
           </div>
@@ -113,18 +152,27 @@ export function Navbar() {
               <div className="flex items-center px-5">
                 <div className="flex-shrink-0">
                   <Avatar>
-                    <AvatarImage src={session.user?.image || ''} alt={session.user?.name || ''} />
-                    <AvatarFallback>{session.user?.name?.charAt(0) || 'U'}</AvatarFallback>
+                    <AvatarImage
+                      src={session.user?.image || ""}
+                      alt={session.user?.name || ""}
+                    />
+                    <AvatarFallback>
+                      {session.user?.name?.charAt(0) || "U"}
+                    </AvatarFallback>
                   </Avatar>
                 </div>
                 <div className="ml-3">
-                  <div className="text-base font-medium text-white">{session.user?.name}</div>
-                  <div className="text-sm font-medium text-gray-400">{session.user?.email}</div>
+                  <div className="text-base font-medium text-white">
+                    {session.user?.name}
+                  </div>
+                  <div className="text-sm font-medium text-gray-400">
+                    {session.user?.email}
+                  </div>
                 </div>
               </div>
               <div className="mt-3 px-2">
-                <Button 
-                  onClick={() => signOut()} 
+                <Button
+                  onClick={() => signOut()}
                   className="w-full justify-start"
                   variant="ghost"
                 >
@@ -135,17 +183,25 @@ export function Navbar() {
             </div>
           ) : (
             <div className="p-4">
-              <Button 
-                onClick={() => signIn("google")} 
+              <Button
+                onClick={() => signIn("google")}
                 className="w-full bg-white text-darkGray hover:bg-gray-100"
               >
-                Sign in with Google
+                <div className="flex items-center justify-center gap-3">
+                  <Image
+                    src={google}
+                    alt="Google"
+                    width={20}
+                    height={20}
+                    className="rounded-full"
+                  />
+                  <div>Sign in with Google</div>
+                </div>
               </Button>
             </div>
           )}
         </div>
       )}
     </nav>
-  )
+  );
 }
-
