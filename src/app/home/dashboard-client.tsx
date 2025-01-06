@@ -103,10 +103,10 @@ export function DashboardClient({ feedbackUrl, feedback, userCode }: DashboardCl
                   {copyConfirmation === 'url' ? 'Copied!' : 'Copy'}
                 </Button>
               </div>
-              <Button onClick={() => setIsEmbedCodeOpen(true)} variant="outline">
+              {/* <Button onClick={() => setIsEmbedCodeOpen(true)} variant="outline">
                 <Code className="w-4 h-4 mr-2" />
                 Get Embed Code
-              </Button>
+              </Button> */}
             </CardContent>
           </Card>
 
