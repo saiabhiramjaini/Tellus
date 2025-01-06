@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Welcome to Tellus
 
-## Getting Started
+The Pulse of Customer Experience - Empower your business with real-time customer insights and drive continuous improvement through meaningful feedback.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+[Website](https://tellus.abhiramverse.tech)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js 15**: React framework for production-grade applications
+- **TypeScript**: For type-safe code and better development experience
+- **Tailwind CSS**: Utility-first CSS framework for styling
+- **shadcn/ui**: High-quality UI components built on Radix UI
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### UI
 
-## Learn More
+![Screenshot 1](https://github.com/user-attachments/assets/ee1fc90e-e51e-42fc-97b5-51b98cccc7f5)
+![Screenshot 2](https://github.com/user-attachments/assets/e6c8a522-0fed-4f6c-b1b7-f75e1a0b8779)
+![Screenshot 3](https://github.com/user-attachments/assets/601b0546-fc0d-42d2-8863-a0183e64f6b4)
+![Screenshot 4](https://github.com/user-attachments/assets/07634ee7-008c-4d93-bfb5-8840457a89b1)
+![Screenshot 5](https://github.com/user-attachments/assets/45218440-8681-4b53-9477-7fc1206e9d35)
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/saiabhiramjaini/tellus.git
+   cd tellus
+   ```
 
-## Deploy on Vercel
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. Set up your environment variables:
+   Create a `.env` file based on the provided `.env.example`:
+   ```env
+   GOOGLE_CLIENT_ID=
+   GOOGLE_CLIENT_SECRET=
+   NEXTAUTH_URL=http://localhost:3000
+   NEXTAUTH_SECRET=secret
+   DATABASE_URL=
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+5. Open your browser and navigate to:
+   ```
+   http://localhost:3000
+   ```
+
+
+
+### Features
+
+- **Feedback Collection**: Embed customizable forms to gather customer feedback.
+- **Real-Time Insights**: Analyze customer satisfaction trends and insights.
+- **Seamless Embedding**: Easily integrate testimonials into your website using our embed code generator.
+
+
+
+### Embedding Testimonials
+
+To embed testimonials on your website:
+
+1. Copy the embed code provided in the dashboard.
+2. Paste it into your website's HTML where you want the testimonials to appear:
+   ```html
+   <div id="tellus-testimonials"></div>
+   <script src="https://tellus.abhiramverse.tech/embed.js" data-code="YOUR_CODE"></script>
+   ```
+3. Preview your embedded testimonials at:
+   ```
+   https://tellus.abhiramverse.tech/embed/YOUR_CODE
+   ```
+
+
+
+
+### Contributing
+
+Contributions are welcome! Feel free to open issues or submit pull requests to help improve Tellus.
+
+1. Fork the repository.
+2. Create a new branch:
+   ```bash
+   git checkout -b feature-name
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m "Add your message here"
+   ```
+4. Push to your branch:
+   ```bash
+   git push origin feature-name
+   ```
+5. Open a pull request on GitHub.
+
+
+
+### Contact
+
+For any queries or support, please contact:
+
+- **Sai Abhiram Jaini**  
+  [GitHub](https://github.com/saiabhiramjaini)  
+
+

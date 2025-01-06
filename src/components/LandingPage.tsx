@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Star, MessageCircle, BarChart3 } from 'lucide-react'
+import { ArrowRight, Star, MessageCircle, Code2Icon } from 'lucide-react'
 import logo from "@/assets/logo.png"
 import { useRouter } from 'next/navigation'
 import { Navbar } from './Navbar'
@@ -53,7 +53,7 @@ export function LandingPage() {
               </div>
               <h2 className="mt-4 text-lg font-semibold text-darkGray">Collect Feedback</h2>
               <p className="mt-2 text-center text-mediumGray">
-                Easily gather customer feedback through customizable forms and surveys.
+                Easily gather customer feedback through forms.
               </p>
             </div>
             <div className="flex flex-col items-center rounded-2xl bg-white/50 backdrop-blur-sm p-8 shadow-lg ring-1 ring-gray-200/50 transition-all hover:shadow-xl">
@@ -67,11 +67,13 @@ export function LandingPage() {
             </div>
             <div className="flex flex-col items-center rounded-2xl bg-white/50 backdrop-blur-sm p-8 shadow-lg ring-1 ring-gray-200/50 transition-all hover:shadow-xl sm:col-span-2 lg:col-span-1">
               <div className="rounded-full bg-darkGray p-3 text-white">
-                <BarChart3 className="h-6 w-6" />
+                <Code2Icon className="h-6 w-6" />
               </div>
-              <h2 className="mt-4 text-lg font-semibold text-darkGray">Analyze Insights</h2>
+              <h2 className="mt-4 text-lg font-semibold text-darkGray">Embedded Code</h2>
               <p className="mt-2 text-center text-mediumGray">
-                Get actionable insights from customer feedback to improve your business.
+                
+
+Obtain the embedded code and effortlessly update testimonials on your end.
               </p>
             </div>
           </div>
