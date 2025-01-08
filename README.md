@@ -71,8 +71,7 @@ To embed testimonials on your website:
 1. Copy the embed code provided in the dashboard.
 2. Paste it into your website's HTML where you want the testimonials to appear:
    ```html
-   <div id="tellus-testimonials"></div>
-   <script src="https://tellus.abhiramverse.tech/embed.js" data-code="YOUR_CODE"></script>
+<iframe src="https://tellus.abhiramverse.tech/embed/830532" height="500px" width="1000px"></iframe>
    ```
 3. Preview your embedded testimonials at:
    ```
