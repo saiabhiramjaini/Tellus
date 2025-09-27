@@ -20,9 +20,16 @@ export default async function HomePage() {
     throw new Error("User not found")
   }
 
-  const feedback = await prisma.feedback.findMany({
+  const feedbackRaw = await prisma.feedback.findMany({
     where: { user: { id: user.id } }
   })
+
+  // Convert Date fields to string for type compatibility
+  const feedback = feedbackRaw.map(f => ({
+    ...f,
+    createdAt: f.createdAt.toISOString(),
+    updatedAt: f.updatedAt.toISOString(),
+  }))
 
   const feedbackUrl = `${process.env.NEXTAUTH_URL}/${user.code}`
 
