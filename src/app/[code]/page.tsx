@@ -184,15 +184,13 @@ export default function FeedbackPage() {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
+                    className="w-full bg-accent hover:bg-accent/90 text-accent-foreground flex items-center justify-center"
                   >
                     {isSubmitting ? (
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                      >
-                        <Send className="w-4 h-4" />
-                      </motion.div>
+                      <span className="flex items-center gap-2">
+                        <span className="inline-block w-4 h-4 border-2 border-t-2 border-accent-foreground border-t-transparent rounded-full animate-spin" />
+                        Submitting...
+                      </span>
                     ) : (
                       <>
                         <Send className="w-4 h-4 mr-2" />
